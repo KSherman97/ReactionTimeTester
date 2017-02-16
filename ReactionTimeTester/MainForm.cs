@@ -37,18 +37,13 @@ namespace ReactionTimeTester
         }
 
         private void button1_Click(object sender, EventArgs e)
-        {
-            stopwatch.Reset();
-            button1.Visible = false;
-            System.Threading.Thread.Sleep(randomTimeGenerator.Next(150, 1500));
-
-            button2.Visible = true;
-            stopwatch.Start();
-            //button2.PerformClick();
-            button2.Enabled = true;
-
-            
+        {   
             //ResetForm();
+
+            if (!testActive)
+                StartTest();
+            else
+                EndTest();
         }
 
         public void ResetForm()
@@ -64,63 +59,43 @@ namespace ReactionTimeTester
             button2.Enabled = false;
             label1.Text = "NO RECENT ATTMEPTS:" + Environment.NewLine;
             label2.Text = "";
-            button2.Visible = false;
-            button1.Visible = true;
+            //button2.Visible = false;
+            //button1.Visible = true;
 
         }
 
         public void StartTest()
         {
-            timeLeft = randomTimeGenerator.Next(5, 50);
-            testActive = true;
-            button1.BackColor = Color.Violet;
-            ButtomCountdownTimer.Start();
-            button1.Text = "Click when the button turns green ";
+            stopwatch.Reset();
+            button1.Visible = false;
+            System.Threading.Thread.Sleep(randomTimeGenerator.Next(350, 1500));
+
+            button2.Visible = true;
+            stopwatch.Start();
+            //button2.PerformClick();
+            button2.Enabled = true;
         }
 
         public void EndTest()
         {
             testActive = false;
             testNumber++;
-            ButtomCountdownTimer.Stop();
             button1.BackColor = Color.Yellow;
             button1.Text = "";
-            stopwatch.Stop();
             //int elapsedTime = (int));
             //reactionTime = elapsedTime;
             button1.Text = stopwatch.ElapsedMilliseconds + "ms" + Environment.NewLine + "Press any key to try again";
             totalReactionTime += (int)stopwatch.ElapsedMilliseconds;
             label1.Text = testNumber + " RECENT ATTMEPTS (AVERAGE: " + (totalReactionTime / testNumber) + "ms)" + Environment.NewLine;
             label2.Text += stopwatch.ElapsedMilliseconds + Environment.NewLine;
-            stopwatch.Reset();
             button1.Enabled = true;
             button2.Enabled = true;
-        }
-
-        private void ButtomCountdownTimer_Tick(object sender, EventArgs e)
-        {
-            button1.Enabled = false;
-            if(timeLeft > 0)
-            {
-                timeLeft = timeLeft - 1;
-                tooSoon = true;
-            }
-            else
-            {
-                tooSoon = false;
-                button1.Enabled = true;
-                ButtomCountdownTimer.Stop();
-                button1.BackColor = Color.Green;
-                //sum.Value = timeCalc1 + timeCalc2;
-
-                stopwatch.Start();
-                timeLeft = 0;
-            }
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
             stopwatch.Stop();
+            EndTest();
 
             MessageBox.Show(String.Format("Elapsed milliseconds: {0}", stopwatch.ElapsedMilliseconds));
             button2.Visible = false;
