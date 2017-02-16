@@ -43,6 +43,10 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // ButtomCountdownTimer
+            // 
+            this.ButtomCountdownTimer.Tick += new System.EventHandler(this.ButtomCountdownTimer_Tick);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
