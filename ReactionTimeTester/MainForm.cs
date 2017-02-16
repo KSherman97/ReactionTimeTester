@@ -41,7 +41,9 @@ namespace ReactionTimeTester
             //ResetForm();
 
             if (!testActive)
+            {
                 StartTest();
+            }
             else
                 EndTest();
         }
@@ -52,6 +54,7 @@ namespace ReactionTimeTester
             testActive = false;
             testNumber = 0;
             reactionTime = 0;
+            totalReactionTime = 0;
 
             button1.BackColor = Color.Cyan;
             button1.Enabled = true;
@@ -59,25 +62,48 @@ namespace ReactionTimeTester
             button2.Enabled = false;
             label1.Text = "NO RECENT ATTMEPTS:" + Environment.NewLine;
             label2.Text = "";
-            //button2.Visible = false;
-            //button1.Visible = true;
+            button2.Visible = true;
+            button1.Visible = true;
 
         }
 
         public void StartTest()
         {
-            stopwatch.Reset();
-            button1.Visible = false;
-            System.Threading.Thread.Sleep(randomTimeGenerator.Next(350, 1500));
-
-            button2.Visible = true;
-            stopwatch.Start();
+            timeWait();
+            button1.BackColor = Color.Green;
             //button2.PerformClick();
-            button2.Enabled = true;
+            //button2.Enabled = true;
+        }
+
+        public void timeWait()
+        {
+            button1.Enabled = false;
+            //button1.Visible = false;
+            button1.Visible = false;
+            button1.BackColor = Color.Violet;
+            button1.Visible = true;
+            //System.Threading.Thread.Sleep(randomTimeGenerator.Next(350, 1500));
+            int wait = randomTimeGenerator.Next(350, 1500);
+            while (wait > 0)
+            {
+                button1.BackColor = Color.Violet;
+                System.Threading.Thread.Sleep(1);
+                wait--;
+            }
+            button1.Enabled = true;
+            button1.Text = "Click when the button turns green ";
+            testActive = true;
+            //button2.Visible = true;
+            stopwatch.Start();
+
         }
 
         public void EndTest()
         {
+            stopwatch.Stop();
+
+            MessageBox.Show(String.Format("Elapsed milliseconds: {0}", stopwatch.ElapsedMilliseconds));
+
             testActive = false;
             testNumber++;
             button1.BackColor = Color.Yellow;
@@ -90,15 +116,12 @@ namespace ReactionTimeTester
             label2.Text += stopwatch.ElapsedMilliseconds + Environment.NewLine;
             button1.Enabled = true;
             button2.Enabled = true;
+            stopwatch.Reset();
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            stopwatch.Stop();
-            EndTest();
-
-            MessageBox.Show(String.Format("Elapsed milliseconds: {0}", stopwatch.ElapsedMilliseconds));
-            button2.Visible = false;
+            ResetForm();
         } 
     }
 }
