@@ -22,6 +22,7 @@ namespace ReactionTimeTester
         int timeCalc1;
         int timeCalc2;
         int timeLeft;
+        int totalReactionTime = 0;
         private string attempts = "";
 
         public MainForm()
@@ -46,12 +47,14 @@ namespace ReactionTimeTester
             testActive = false;
             testNumber = 0;
             reactionTime = 0;
+            int totalReactionTime = 0;
 
             button1.BackColor = Color.Cyan;
             button1.Enabled = true;
             button2.Text = "Reset Stats";
             button2.Enabled = false;
             label1.Text = "RECENT ATTMEPTS:" + Environment.NewLine;
+            label2.Text = "No results to show";
         }
 
         public void StartTest()
@@ -74,7 +77,9 @@ namespace ReactionTimeTester
             //int elapsedTime = (int));
             //reactionTime = elapsedTime;
             button1.Text = stopwatch.ElapsedMilliseconds + "ms" + Environment.NewLine + "Press any key to try again";
-            label1.Text += stopwatch.ElapsedMilliseconds + Environment.NewLine;
+            totalReactionTime += (int)stopwatch.ElapsedMilliseconds;
+            label1.Text = testNumber + " RECENT ATTMEPTS (AVERAGE: " + (totalReactionTime / testNumber) + "ms)" + Environment.NewLine;
+            label2.Text += stopwatch.ElapsedMilliseconds + Environment.NewLine;
             stopwatch.Reset();
             button1.Enabled = true;
             button2.Enabled = true;
