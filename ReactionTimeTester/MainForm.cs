@@ -31,15 +31,24 @@ namespace ReactionTimeTester
             InitializeComponent();
             ResetForm();
             button1.BackColor = Color.Cyan;
+            randomTimeGenerator = new Random((int)DateTime.Now.Ticks);
+
+
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (!testActive)
-                StartTest();
-            else
-                EndTest();
+            stopwatch.Reset();
+            button1.Visible = false;
+            System.Threading.Thread.Sleep(randomTimeGenerator.Next(150, 1500));
 
+            button2.Visible = true;
+            stopwatch.Start();
+            //button2.PerformClick();
+            button2.Enabled = true;
+
+            
+            //ResetForm();
         }
 
         public void ResetForm()
@@ -55,6 +64,9 @@ namespace ReactionTimeTester
             button2.Enabled = false;
             label1.Text = "NO RECENT ATTMEPTS:" + Environment.NewLine;
             label2.Text = "";
+            button2.Visible = false;
+            button1.Visible = true;
+
         }
 
         public void StartTest()
@@ -108,7 +120,10 @@ namespace ReactionTimeTester
 
         private void button2_Click(object sender, EventArgs e)
         {
-            ResetForm();
+            stopwatch.Stop();
+
+            MessageBox.Show(String.Format("Elapsed milliseconds: {0}", stopwatch.ElapsedMilliseconds));
+            button2.Visible = false;
         } 
     }
 }
