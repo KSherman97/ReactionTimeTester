@@ -26,7 +26,7 @@ namespace ReactionTimeTester
         {
             InitializeComponent();
             ResetForm();
-            button1.BackColor = Color.Blue;
+            button1.BackColor = Color.Cyan;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -45,14 +45,14 @@ namespace ReactionTimeTester
             testNumber = 0;
             reactionTime = 0;
 
-            button1.BackColor = Color.Blue;
+            button1.BackColor = Color.Cyan;
         }
 
         public void StartTest()
         {
             timeLeft = randomTimeGenerator.Next(1, 25);
             testActive = true;
-            button1.BackColor = Color.Red;
+            button1.BackColor = Color.Violet;
             ButtomCountdownTimer.Start();
         }
 
@@ -63,6 +63,11 @@ namespace ReactionTimeTester
             ButtomCountdownTimer.Stop();
             button1.BackColor = Color.Yellow;
             button1.Text = "";
+            stopwatch.Stop();
+            //int elapsedTime = (int));
+            //reactionTime = elapsedTime;
+            button1.Text = stopwatch.ElapsedMilliseconds + "ms" + Environment.NewLine + "Press any key to try again";
+            stopwatch.Reset();
         }
 
         private void ButtomCountdownTimer_Tick(object sender, EventArgs e)
