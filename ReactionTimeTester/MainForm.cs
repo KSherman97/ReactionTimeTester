@@ -45,6 +45,7 @@ namespace ReactionTimeTester
 
         public void ResetForm()
         {
+            ButtomCountdownTimer.Interval = 1;
             button1.Text = "CLICK TO START TEST";
             testActive = false;
             testNumber = 0;
@@ -60,9 +61,10 @@ namespace ReactionTimeTester
 
         public void StartTest()
         {
-            timeLeft = randomTimeGenerator.Next(100, 100);
+            timeLeft = randomTimeGenerator.Next(100, 500);
             testActive = true;
             button1.BackColor = Color.Violet;
+            ButtomCountdownTimer.Interval = 1;
             ButtomCountdownTimer.Start();
             button1.Text = "Click when the button turns green ";
         }
@@ -88,9 +90,9 @@ namespace ReactionTimeTester
 
         private void ButtomCountdownTimer_Tick(object sender, EventArgs e)
         {
-            //button1.Enabled = false;
-            if(timeLeft > 0)
+            if (timeLeft > 0)
             {
+
                 timeLeft = timeLeft - 1;
                 tooSoon = true;
             }
@@ -105,6 +107,7 @@ namespace ReactionTimeTester
                 timeLeft = 0;
                 stopwatch.Start();
             }
+            
         }
 
         private void button2_Click(object sender, EventArgs e)
