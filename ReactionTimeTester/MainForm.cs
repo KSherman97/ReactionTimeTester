@@ -38,7 +38,8 @@ namespace ReactionTimeTester
             if (!testActive)
                 StartTest();
             else
-                EndTest();
+                if(!tooSoon)
+                    EndTest();
 
         }
 
@@ -59,7 +60,7 @@ namespace ReactionTimeTester
 
         public void StartTest()
         {
-            timeLeft = randomTimeGenerator.Next(5, 50);
+            timeLeft = randomTimeGenerator.Next(100, 100);
             testActive = true;
             button1.BackColor = Color.Violet;
             ButtomCountdownTimer.Start();
@@ -81,13 +82,13 @@ namespace ReactionTimeTester
             label1.Text = testNumber + " RECENT ATTMEPTS (AVERAGE: " + (totalReactionTime / testNumber) + "ms)" + Environment.NewLine;
             label2.Text += stopwatch.ElapsedMilliseconds + Environment.NewLine;
             stopwatch.Reset();
-            button1.Enabled = true;
+            //button1.Enabled = true;
             button2.Enabled = true;
         }
 
         private void ButtomCountdownTimer_Tick(object sender, EventArgs e)
         {
-            button1.Enabled = false;
+            //button1.Enabled = false;
             if(timeLeft > 0)
             {
                 timeLeft = timeLeft - 1;
@@ -96,7 +97,7 @@ namespace ReactionTimeTester
             else
             {
                 tooSoon = false;
-                button1.Enabled = true;
+                //button1.Enabled = true;
                 ButtomCountdownTimer.Stop();
                 button1.BackColor = Color.Green;
                 //sum.Value = timeCalc1 + timeCalc2;

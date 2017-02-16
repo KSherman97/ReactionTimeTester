@@ -48,6 +48,7 @@
             // 
             // ButtomCountdownTimer
             // 
+            this.ButtomCountdownTimer.Interval = 1;
             this.ButtomCountdownTimer.Tick += new System.EventHandler(this.ButtomCountdownTimer_Tick);
             // 
             // button2
