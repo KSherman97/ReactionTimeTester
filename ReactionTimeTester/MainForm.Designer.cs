@@ -95,7 +95,7 @@
             this.MinimizeBox = false;
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "MainForm";
+            this.Text = "Kyle\'s Reaction Time Test";
             this.ResumeLayout(false);
             this.PerformLayout();
 

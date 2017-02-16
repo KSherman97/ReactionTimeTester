@@ -78,11 +78,11 @@ namespace ReactionTimeTester
             button1.Text = "";
             stopwatch.Stop();
             //int elapsedTime = (int));
-            //reactionTime = elapsedTime;
-            button1.Text = stopwatch.ElapsedMilliseconds + "ms" + Environment.NewLine + "Press any key to try again";
-            totalReactionTime += (int)stopwatch.ElapsedMilliseconds;
+            decimal reactionTime = stopwatch.ElapsedMilliseconds - 100;
+            button1.Text = reactionTime + "ms" + Environment.NewLine + "Press any key to try again";
+            totalReactionTime += (int)reactionTime;
             label1.Text = testNumber + " RECENT ATTMEPTS (AVERAGE: " + (totalReactionTime / testNumber) + "ms)" + Environment.NewLine;
-            label2.Text += stopwatch.ElapsedMilliseconds + Environment.NewLine;
+            label2.Text += reactionTime + Environment.NewLine;
             stopwatch.Reset();
             //button1.Enabled = true;
             button2.Enabled = true;
