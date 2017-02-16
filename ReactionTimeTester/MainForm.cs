@@ -21,6 +21,7 @@ namespace ReactionTimeTester
         int timeCalc1;
         int timeCalc2;
         int timeLeft;
+        private string attempts = "";
 
         public MainForm()
         {
@@ -46,14 +47,19 @@ namespace ReactionTimeTester
             reactionTime = 0;
 
             button1.BackColor = Color.Cyan;
+            button1.Enabled = true;
+            button2.Text = "Reset Stats";
+            button2.Enabled = false;
+            label1.Text = "RECENT ATTMEPTS:" + Environment.NewLine;
         }
 
         public void StartTest()
         {
-            timeLeft = randomTimeGenerator.Next(1, 25);
+            timeLeft = randomTimeGenerator.Next(5, 50);
             testActive = true;
             button1.BackColor = Color.Violet;
             ButtomCountdownTimer.Start();
+            button1.Text = "Click when the button turns green ";
         }
 
         public void EndTest()
@@ -67,17 +73,22 @@ namespace ReactionTimeTester
             //int elapsedTime = (int));
             //reactionTime = elapsedTime;
             button1.Text = stopwatch.ElapsedMilliseconds + "ms" + Environment.NewLine + "Press any key to try again";
+            label1.Text += stopwatch.ElapsedMilliseconds + Environment.NewLine;
             stopwatch.Reset();
+            button1.Enabled = true;
+            button2.Enabled = true;
         }
 
         private void ButtomCountdownTimer_Tick(object sender, EventArgs e)
         {
+            button1.Enabled = false;
             if(timeLeft > 0)
             {
                 timeLeft = timeLeft - 1;
             }
             else
             {
+                button1.Enabled = true;
                 ButtomCountdownTimer.Stop();
                 button1.BackColor = Color.Green;
                 //sum.Value = timeCalc1 + timeCalc2;
@@ -85,6 +96,11 @@ namespace ReactionTimeTester
                 stopwatch.Start();
                 timeLeft = 0;
             }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            ResetForm();
         } 
     }
 }
