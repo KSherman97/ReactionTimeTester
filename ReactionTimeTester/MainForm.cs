@@ -101,8 +101,8 @@ namespace ReactionTimeTester
                 button1.BackColor = Color.Green;
                 //sum.Value = timeCalc1 + timeCalc2;
 
-                stopwatch.Start();
                 timeLeft = 0;
+                stopwatch.Start();
             }
         }
 
