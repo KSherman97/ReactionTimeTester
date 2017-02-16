@@ -14,6 +14,7 @@ namespace ReactionTimeTester
     public partial class MainForm : Form
     {
         private bool testActive = false;
+        private bool tooSoon = false;
         private int testNumber = 0;
         private int reactionTime = 0;
         Random randomTimeGenerator = new Random();
@@ -85,9 +86,11 @@ namespace ReactionTimeTester
             if(timeLeft > 0)
             {
                 timeLeft = timeLeft - 1;
+                tooSoon = true;
             }
             else
             {
+                tooSoon = false;
                 button1.Enabled = true;
                 ButtomCountdownTimer.Stop();
                 button1.BackColor = Color.Green;
