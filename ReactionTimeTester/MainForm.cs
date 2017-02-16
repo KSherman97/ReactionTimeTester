@@ -27,6 +27,7 @@ namespace ReactionTimeTester
 
         public MainForm()
         {
+            SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
             InitializeComponent();
             ResetForm();
             button1.BackColor = Color.Cyan;
@@ -47,14 +48,13 @@ namespace ReactionTimeTester
             testActive = false;
             testNumber = 0;
             reactionTime = 0;
-            int totalReactionTime = 0;
 
             button1.BackColor = Color.Cyan;
             button1.Enabled = true;
             button2.Text = "Reset Stats";
             button2.Enabled = false;
-            label1.Text = "RECENT ATTMEPTS:" + Environment.NewLine;
-            label2.Text = "No results to show";
+            label1.Text = "NO RECENT ATTMEPTS:" + Environment.NewLine;
+            label2.Text = "";
         }
 
         public void StartTest()
